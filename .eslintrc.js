@@ -1,4 +1,53 @@
 module.exports = {
-  root: true,
-  extends: '@react-native',
+  env: {
+    es6: true,
+    node: true,
+  },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+  ],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+  },
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: "module",
+  },
+  plugins: ["react", "@typescript-eslint", "react-hooks"],
+  rules: {
+    indent: "off",
+    "@typescript-eslint/indent": [
+      "error",
+      2,
+      {
+        SwitchCase: 1,
+      },
+    ],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "double"],
+    semi: ["error", "always"],
+    "no-unused-vars": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/jsx-no-literals": [
+      "error",
+      {
+        ignoreProps: true,
+      },
+    ],
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 };
