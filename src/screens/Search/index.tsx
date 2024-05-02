@@ -1,72 +1,71 @@
-// import ColoredBlurView from "@/components/ColoredBlurView";
-// import { useDefaultStyles } from "@/hooks/theme";
-// import { createStackNavigator } from "@react-navigation/stack";
-// import React, { useState } from "react";
-// import { StyleSheet } from "react-native";
-// import { GestureHandlerRootView } from "react-native-gesture-handler";
-//
-// const Stack = createStackNavigator();
-//
-// const SearchStack: React.FC = () => {
-//   const defaultStyles = useDefaultStyles();
-//   const [isInitialRoute, setIsInitialRoute] = useState(true);
-//
-//   return (
-//     <GestureHandlerRootView style={{ flex: 1 }}>
-//       <Stack.Navigator
-//         initialRouteName="Search"
-//         screenOptions={{
-//           headerTintColor: defaultStyles.themeColor.color,
-//           headerTitleStyle: defaultStyles.stackHeader,
-//           cardStyle: defaultStyles.view,
-//           headerTransparent: true,
-//           headerBackground: () => (
-//             <ColoredBlurView style={StyleSheet.absoluteFill} />
-//           ),
-//         }}
-//         screenListeners={{
-//           state: (e) => {
-//             const {
-//               state: { routes },
-//             } = e.data as {
-//               state: { routes?: { key: string; name: string }[] };
-//             };
-//             setIsInitialRoute(routes?.length === 1);
-//           },
-//         }}
-//       >
-//         {/* <Stack.Screen
-//           name="Search"
-//           component={Search}
-//           // options={{ headerTitle: t("search"), headerShown: false }}
-//         />
-//         <Stack.Screen
-//           name="Album"
-//           component={Album}
-//           // options={{ headerTitle: t("album") }}
-//         /> */}
-//       </Stack.Navigator>
-//       <NowPlaying offset={isInitialRoute ? 64 : 0} />
-//     </GestureHandlerRootView>
-//   );
-// };
-//
-// export default SearchStack;
-//
-import React from "react";
+import React, { useState } from "react";
+import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
+// import SearchIcon from "../../assets/icons/magnifying-glass.svg";
+import { IconSearch } from "@tabler/icons-react-native";
+import ColoredBlurView from "../../components/ColoredBlurView";
+import Input from "../../components/Input";
+import NowPlaying from "../../components/NowPlaying";
 import { Header } from "../../components/Typography";
+import { useDefaultStyles } from "../../hooks/providers/theme";
 
-const Container = styled.SafeAreaView`
-  flex: 1;
-  justify-content: center;
+// const SEARCH_INPUT_HEIGHT = 62;
+
+const Container = styled(View)`
+  padding: 4px 24px 0 24px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  border-top-width: 0.5px;
 `;
 
 const Search: React.FC = () => {
+  const defaultStyles = useDefaultStyles();
+
+  // input state
+
+  // Prepare state for fuse and albums
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSubmit = () => {
+    setSearchTerm("submit");
+  };
+
+  const SearchInput = React.useMemo(
+    () => (
+      <View>
+        <ColoredBlurView>
+          <Container style={[defaultStyles.border]}>
+            <View>
+              <Input
+                value={searchTerm}
+                onChangeText={setSearchTerm}
+                style={[defaultStyles.view, { marginBottom: 12 }]}
+                placeholder="Search..."
+                autoCorrect={false}
+                onSubmitEditing={handleSubmit}
+                startIcon={
+                  <IconSearch
+                    size={16}
+                    strokeWidth={3}
+                    color={defaultStyles.textHalfOpacity.color}
+                  />
+                }
+              />
+            </View>
+          </Container>
+        </ColoredBlurView>
+      </View>
+    ),
+    [defaultStyles, searchTerm],
+  );
+
   return (
-    <Container>
+    <SafeAreaView style={{ flex: 1 }}>
+      {SearchInput}
       <Header>{"Search"}</Header>
-    </Container>
+      <NowPlaying />
+    </SafeAreaView>
   );
 };
 

@@ -3,7 +3,7 @@ import React, { PropsWithChildren, useEffect } from "react";
 import { useColorScheme } from "react-native";
 import TrackPlayer, { Capability } from "react-native-track-player";
 import { Provider } from "react-redux";
-import { ColorSchemeProvider } from "./hooks/theme";
+import { ColorSchemeProvider } from "./hooks/providers/theme";
 import Routes from "./screens";
 import store, { useTypedSelector } from "./store";
 import { ColorScheme } from "./store/settings";

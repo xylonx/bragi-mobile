@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useContext } from "react";
 import { useColorScheme } from "react-native";
-import { useTypedSelector } from "../store";
-import { ColorScheme } from "../store/settings";
-import { themes } from "../themes/Theme";
+import { useTypedSelector } from "../../store";
+import { ColorScheme } from "../../store/settings";
+import { themes } from "../../themes/Theme";
 
 // Create context for supplying the theming information
 export const ColorSchemeContext = React.createContext(themes.dark);

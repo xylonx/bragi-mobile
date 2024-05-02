@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import { Text as BaseText, TextProps } from "react-native";
 import styled from "styled-components/native";
-import { useDefaultStyles } from "../hooks/theme";
+import { useDefaultStyles } from "../hooks/providers/theme";
 
 export function Text(props: PropsWithChildren<TextProps>) {
   const defaultStyles = useDefaultStyles();
