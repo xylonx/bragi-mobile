@@ -70,6 +70,9 @@ const generateStyles = (scheme: ColorSchemeName) => {
     themeBackground: {
       backgroundColor: "#FF3C00",
     },
+    card: {
+      color: scheme === "dark" ? "#27272a" : "#f4f4f5",
+    },
   });
 };
 

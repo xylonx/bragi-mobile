@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 // import SearchIcon from "../../assets/icons/magnifying-glass.svg";
@@ -7,8 +7,8 @@ import { IconSearch } from "@tabler/icons-react-native";
 import ColoredBlurView from "../../components/ColoredBlurView";
 import Input from "../../components/Input";
 import NowPlaying from "../../components/NowPlaying";
-import { Header } from "../../components/Typography";
 import { useDefaultStyles } from "../../hooks/providers/theme";
+import TrackCard, { exampleCardInfo } from "../Music/components/TrackCard";
 
 // const SEARCH_INPUT_HEIGHT = 62;
 
@@ -17,6 +17,11 @@ const Container = styled(View)`
   margin-bottom: 0px;
   padding-bottom: 0px;
   border-top-width: 0.5px;
+`;
+
+const ListContainer = styled(View)`
+  flex-direction: row;
+  flex-grow: 1;
 `;
 
 const Search: React.FC = () => {
@@ -63,7 +68,22 @@ const Search: React.FC = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {SearchInput}
-      <Header>{"Search"}</Header>
+
+      <ListContainer></ListContainer>
+
+      <TrackCard
+        onPress={(id: string) => {
+          Alert.prompt("onpress", `track id: ${id}`);
+        }}
+        {...exampleCardInfo}
+      />
+
+      <TrackCard
+        onPress={(id: string) => {
+          Alert.prompt("onpress", `track id: ${id}`);
+        }}
+        {...exampleCardInfo}
+      />
       <NowPlaying />
     </SafeAreaView>
   );
